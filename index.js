@@ -1,14 +1,14 @@
-class BinaryTreeNode {
-  constructor(value) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
-    this.next = null;
+class LinkedListNode {
+  #data = '';
+  #next = null; // another instance of LinkedListNode
+
+  constructor(data) {
+    this.#data = data;
   }
 
   add(node) {
     if (!this.next) {
-      this.left = node;
+      this.next = node;
     } else {
       this.next.add(node);
     }
@@ -17,6 +17,27 @@ class BinaryTreeNode {
   getList() {
     if (!this.next) return this.value;
     return ` ${this.value} ${this.next.getList()}`;
+  }
+}
+
+class BinaryTreeNode {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+
+  add(node) {
+    if (node.value === this.value) {
+      return;
+    }
+    if (node.value < this.value) {
+      if (!this.left) this.left = node;
+      else this.left.add(node);
+    } else {
+      if (!this.right) this.right = node;
+      else this.right.add(node);
+    }
   }
 }
 
