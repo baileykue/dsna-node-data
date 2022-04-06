@@ -49,3 +49,28 @@ const D = new BinaryTreeNode('D');
 B.add(A);
 B.add(D);
 B.add(C);
+
+class PersonTreeNode {
+  constructor(person) {
+    this.value = person.name;
+    this.person = person;
+    this.left = null;
+    this.right = null;
+  }
+
+  add(node) {
+    if (node.value === this.value) return;
+    const dir = node.value < this.value ? 'left' : 'right';
+
+    if (!this[dir]) this[dir] = node;
+    else this[dir].add(node);
+  }
+
+  findPerson(name) {
+    if (this.value === name) return this.person;
+
+    const dir = node.value < this.value ? 'left' : 'right';
+    if (!this[dir]) return null;
+    return this[dir].findPerson(name);
+  }
+}
